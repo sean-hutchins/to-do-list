@@ -24,7 +24,7 @@
             </thead>
 
             <tbody>
-                @if (!empty($tasks))
+                @if ($tasks->isNotEmpty())
                     @foreach ($tasks as $t)
                         <tr>
                             <td class="col-1">{{ $t->id }}</td>
