@@ -1,10 +1,17 @@
 @extends('layout.base')
 
 @section('content')
-<form class="row">
+<x-shared.messages />
+
+<div class="row">
     <div class="col">
-        <input class="form-control mb-3" id="task-name" name="task_name" placeholder="Insert task name" type="text" />
-        <button class="btn btn-primary" type="submit">Add</button>
+        <form method="POST" action="{{ route('task.store') }}">
+            @csrf
+            @method('PUT')
+
+            <input class="form-control mb-3" id="task-name" name="name" placeholder="Insert task name" type="text" />
+            <button class="btn btn-primary" type="submit">Add</button>
+        </form>
     </div>
 
     <div class="col">
@@ -21,14 +28,25 @@
                     @foreach ($tasks as $t)
                         <tr>
                             <td>{{ $t->id }}</td>
-                            <td>{{ $t->name }}</td>
+                            <td @class(['complete' => $t->complete])>{{ $t->name }}</td>
                             <td>
-                                @if (!$t->complete)
-                                    <div class="actions">
-                                        <button class="bi bi-check" title="Complete task" type="submit"></button>
+                                <div class="actions">
+                                    @if (!$t->complete)
+                                        <form method="POST" action="{{ route('task.update', $t) }}">
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <button class="bi bi-check" name="complete" title="Complete task" type="submit" value="1"></button>
+                                        </form>
+                                    @endif
+
+                                    <form method="POST" action="{{ route('task.destroy', $t) }}">
+                                        @csrf
+                                        @method('DELETE')
+
                                         <button class="bi bi-x" title="Remove task" type="submit"></button>
-                                    </div>
-                                @endif
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -40,5 +58,5 @@
             </tbody>
         </table>
     </div>
-</form>
+</div>
 @endsection
