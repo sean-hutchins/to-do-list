@@ -10,20 +10,47 @@ body, html {
 }
 
 #tasks {
+	:where(td, th):last-child {
+		max-width: 80px;
+	}
+
+	td, th {
+		padding: 0.5rem 1rem;
+	}
+
+	td {
+		&.complete {
+			text-decoration: line-through;
+		}
+	}
+
+
 	.actions {
+		display: flex;
+		gap: 0.5rem;
+
+
 		button {
 			color: #fff;
+			border: 2px solid rgb(0, 0, 0, 0.6);
 			border-radius: 3px;
 			font-size: 28px;
 			height: 40px;
+			transition: background-color 300ms, color 200ms;
 			width: 40px;
 
 			&.bi-check {
 				background-color: var(--bs-green);
 			}
 
-			&.bi-x {
+			&.bi-trash {
 				background-color: var(--bs-red);
+			}
+
+			&:hover {
+				background-color: #fff;
+				color: #888;
+				transition: background-color 300ms, color 200ms;
 			}
 		}
 	}
