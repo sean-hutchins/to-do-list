@@ -1,0 +1,30 @@
+body, html {
+	background-color: #eee;
+	font: 16px 'Lato', sans-serif;
+}
+
+
+
+#page-footer {
+	margin-top: 4rem;
+}
+
+#tasks {
+	.actions {
+		button {
+			color: #fff;
+			border-radius: 3px;
+			font-size: 28px;
+			height: 40px;
+			width: 40px;
+
+			&.bi-check {
+				background-color: var(--bs-green);
+			}
+
+			&.bi-x {
+				background-color: var(--bs-red);
+			}
+		}
+	}
+}
